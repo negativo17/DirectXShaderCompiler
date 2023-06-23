@@ -1,24 +1,31 @@
+%global date 20230623
+%global commit0 60719ebc654d48ee3c017697f302fa8565691f9b
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global commit1 980971e835876dc0cde415e8f9bc646e64667bf7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
-%global commit2 1d31a100405cf8783ca7a31e31cdd727c9fc54c3
+%global commit2 268a061764ee69f09a477a695bf6a11ffe311b8d
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
-%global commit3 40f5bf59c6acb4754a0bffd3c53a715732883a12
+%global commit3 23cb9b96cc2acf93e55839136b2c9643cbef6df6
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
-%global commit4 35912e1b7778ec2ddcff7e7188177761539e59e0
+%global commit4 66edefd2bb641de8a2f46b476de21f227fc03a28
 %global shortcommit4 %(c=%{commit4}; echo ${c:0:7})
-%global commit5 4be240789d5b322df9f02b7e19c8651f3ccbf205
+%global commit5 b76a3eac1dfc7f0fe1d6a64cb59eab868056f099
 %global shortcommit5 %(c=%{commit5}; echo ${c:0:7})
 
 %global _warning_options -Wall -Werror=format-security -Wno-error=restrict
 
 Name:           DirectXShaderCompiler
-Version:        1.7.2212.1
-Release:        1%{?dist}
+Version:        1.8.2306
+Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        DirectX Shader Compiler
 License:        NCSA
 URL:            https://github.com/microsoft/DirectXShaderCompiler
 
-Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+%if 0%{?tag:1}
+Source0:        %url/archive/%{version}/%{name}-%{version}.tar.gz
+%else
+Source0:        %url/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+%endif
 Source1:        https://github.com/microsoft/DirectX-Headers/archive/%{commit1}.tar.gz#/DirectX-Headers-%{shortcommit1}.tar.gz
 Source2:        https://github.com/KhronosGroup/SPIRV-Headers/archive/%{commit2}.tar.gz#/SPIRV-Headers-%{shortcommit2}.tar.gz
 Source3:        https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit3}.tar.gz#/SPIRV-Tools-%{shortcommit3}.tar.gz
@@ -43,7 +50,11 @@ Language (DXIL) representation. Applications that make use of DirectX for
 graphics, games, and computation can use it to generate shader programs.
 
 %prep
+%if 0%{?tag:1}
 %autosetup -p1
+%else
+%autosetup -p1 -n %{name}-%{commit0}
+%endif
 
 tar -xzf %{SOURCE1} --strip-components=1 -C external/DirectX-Headers
 tar -xzf %{SOURCE2} --strip-components=1 -C external/SPIRV-Headers
@@ -86,5 +97,8 @@ install -m644 include/dxc/{dxcapi.h,dxcerrors.h,dxcisense.h,WinAdapter.h} \
 %{_libdir}/libdxclib.a
 
 %changelog
+* Fri Jun 23 2023 Simone Caronni <negativo17@gmail.com> - 1.8.2306-1.20230623git60719eb
+- Update to 1.8.2306-preview branch snapshot (fixes build on Fedora 38).
+
 * Sun Apr 02 2023 Simone Caronni <negativo17@gmail.com> - 1.7.2212.1-1
 - First build.
