@@ -1,3 +1,5 @@
+%undefine       __cmake_in_source_build
+
 %global date 20230623
 %global commit0 60719ebc654d48ee3c017697f302fa8565691f9b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
