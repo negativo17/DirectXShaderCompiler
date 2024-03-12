@@ -2,27 +2,28 @@
 %global date 20240217
 %global commit0 c80232c3ddc3d9c265f2476641d1d7f1a627e974
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global tag 1.8.2403
 # external/DirectX-Headers
 %global commit1 980971e835876dc0cde415e8f9bc646e64667bf7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 # external/SPIRV-Headers
-%global commit2 1c6bb2743599e6eb6f37b2969acc0aef812e32e3
+%global commit2 8b246ff75c6615ba4532fe4fde20f1be090c3764
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 # external/SPIRV-Tools
-%global commit3 f0cc85efdbbe3a46eae90e0f915dc1509836d0fc
+%global commit3 04896c462d9f3f504c99a4698605b6524af813c1
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
 %global _warning_options -Wall -Werror=format-security -Wno-error=restrict
 
 Name:           DirectXShaderCompiler
-Version:        1.8.2403
-Release:        1%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
+Version:        %{tag}
+Release:        2%{!?tag:.%{date}git%{shortcommit0}}%{?dist}
 Summary:        DirectX Shader Compiler
 License:        NCSA
 URL:            https://github.com/microsoft/DirectXShaderCompiler
 
 %if 0%{?tag:1}
-Source0:        %url/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        %url/archive/v%{version}/%{name}-%{version}.tar.gz
 %else
 Source0:        %url/archive/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 %endif
@@ -104,6 +105,9 @@ install -m644 include/dxc/*.h \
 %{_libdir}/libdxclib.a
 
 %changelog
+* Tue Mar 12 2024 Simone Caronni <negativo17@gmail.com> - 1.8.2403-2
+- Update to final 1.8.2403 release.
+
 * Sun Feb 18 2024 Simone Caronni <negativo17@gmail.com> - 1.8.2403-1.20240217gitc80232c
 - Update to snapshot of 1.8.2403 release.
 
