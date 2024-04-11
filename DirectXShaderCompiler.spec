@@ -1,3 +1,5 @@
+%undefine __cmake_in_source_build
+
 # external/DirectX-Headers
 %global commit1 980971e835876dc0cde415e8f9bc646e64667bf7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
