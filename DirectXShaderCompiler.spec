@@ -4,16 +4,16 @@
 %global commit1 980971e835876dc0cde415e8f9bc646e64667bf7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 # external/SPIRV-Headers
-%global commit2 1c6bb2743599e6eb6f37b2969acc0aef812e32e3
+%global commit2 4f7b471f1a66b6d06462cd4ba57628cc0cd087d7
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 # external/SPIRV-Tools
-%global commit3 f0cc85efdbbe3a46eae90e0f915dc1509836d0fc
+%global commit3 dd4b663e13c07fea4fbb3f70c1c91c86731099f7
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
 %global _warning_options -Wall -Werror=format-security -Wno-error=restrict
 
 Name:           DirectXShaderCompiler
-Version:        1.8.2403.2
+Version:        1.8.2405
 Release:        1%{?dist}
 Summary:        DirectX Shader Compiler
 License:        NCSA
@@ -61,7 +61,7 @@ tar -xzf %{SOURCE3} --strip-components=1 -C external/SPIRV-Tools
 
 %install
 mkdir -p %{buildroot}%{_bindir}
-install -m755 %{_vpath_builddir}/bin/dx{a,c,l,opt,r,v}* \
+install -m755 %{_vpath_builddir}/bin/dx{a,c,opt,r,v} \
     %{buildroot}%{_bindir}/
 
 mkdir -p %{buildroot}%{_libdir}
@@ -78,22 +78,19 @@ install -m644 include/dxc/*.h \
 %license LICENSE.TXT
 %doc CONTRIBUTING.md README.md SECURITY.md ThirdPartyNotices.txt
 %{_bindir}/dxa
-%{_bindir}/dxa-3.7
 %{_bindir}/dxc
-%{_bindir}/dxc-3.7
-%{_bindir}/dxl
-%{_bindir}/dxl-3.7
 %{_bindir}/dxopt
-%{_bindir}/dxopt-3.7
 %{_bindir}/dxr
-%{_bindir}/dxr-3.7
 %{_bindir}/dxv
-%{_bindir}/dxv-3.7
 %{_includedir}/dxc
 %{_libdir}/libdxcompiler.so
 %{_libdir}/libdxclib.a
 
 %changelog
+* Fri May 31 2024 Simone Caronni <negativo17@gmail.com> - 1.8.2405-1
+- Update to May 2024 release.
+- Fix duplicate binaries.
+
 * Tue Apr 02 2024 Simone Caronni <negativo17@gmail.com> - 1.8.2403.2-1
 - Update to 1.8.2403.2 (patch 2).
 - Clean up SPEC file.
