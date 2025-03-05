@@ -4,16 +4,16 @@
 %global commit1 980971e835876dc0cde415e8f9bc646e64667bf7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 # external/SPIRV-Headers
-%global commit2 2acb319af38d43be3ea76bfabf3998e5281d8d12
+%global commit2 3f17b2af6784bfa2c5aa5dbb8e0e74a607dd8b3b
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 # external/SPIRV-Tools
-%global commit3 0cfe9e7219148716dfd30b37f4d21753f098707a
+%global commit3 4d2f0b40bfe290dea6c6904dafdf7fd8328ba346
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
 %global _warning_options -Wall -Werror=format-security -Wno-error=restrict
 
 Name:           DirectXShaderCompiler
-Version:        1.8.2407
+Version:        1.8.2502
 Release:        1%{?dist}
 Summary:        DirectX Shader Compiler
 License:        NCSA
@@ -87,6 +87,9 @@ install -m644 include/dxc/*.h \
 %{_libdir}/libdxclib.a
 
 %changelog
+* Wed Mar 05 2025 Simone Caronni <negativo17@gmail.com> - 1.8.2502-1
+- Update to February 2025 release (1.8.2502).
+
 * Mon Aug 05 2024 Simone Caronni <negativo17@gmail.com> - 1.8.2407-1
 - Update to July 2024 release.
 
