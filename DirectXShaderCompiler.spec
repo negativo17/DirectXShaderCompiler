@@ -13,7 +13,7 @@
 %global _warning_options -Wall -Werror=format-security -Wno-error=restrict
 
 Name:           DirectXShaderCompiler
-Version:        1.8.2505
+Version:        1.8.2505.1
 Release:        1%{?dist}
 Summary:        DirectX Shader Compiler
 License:        NCSA
@@ -87,6 +87,9 @@ install -m644 include/dxc/*.h \
 %{_libdir}/libdxclib.a
 
 %changelog
+* Wed Jul 16 2025 Simone Caronni <negativo17@gmail.com> - 1.8.2505.1-1
+- Update to 1.8.2505.1 (May 2025 - Patch 1).
+
 * Mon Jun 02 2025 Simone Caronni <negativo17@gmail.com> - 1.8.2505-1
 - Update to May 2025 release (1.8.2505).
 
