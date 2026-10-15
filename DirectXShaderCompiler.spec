@@ -4,16 +4,16 @@
 %global commit1 980971e835876dc0cde415e8f9bc646e64667bf7
 %global shortcommit1 %(c=%{commit1}; echo ${c:0:7})
 # external/SPIRV-Headers
-%global commit2 29981f65241605e08b0ede4cfeb999fe3b723c6a
+%global commit2 496543121ce6419f23d6fa5d7194ba66c36212d2
 %global shortcommit2 %(c=%{commit2}; echo ${c:0:7})
 # external/SPIRV-Tools
-%global commit3 b707790a898e44038547df54580022fc1cf89c3d
+%global commit3 ef96ed763b43b59b33b31b362f09a02b729fa1c9
 %global shortcommit3 %(c=%{commit3}; echo ${c:0:7})
 
 %global _warning_options -Wall -Werror=format-security -Wno-error=restrict
 
 Name:           DirectXShaderCompiler
-Version:        1.9.2607
+Version:        1.9.2609
 Release:        1%{?dist}
 Summary:        DirectX Shader Compiler
 License:        NCSA
@@ -23,9 +23,6 @@ Source0:        %url/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        https://github.com/microsoft/DirectX-Headers/archive/%{commit1}.tar.gz#/DirectX-Headers-%{shortcommit1}.tar.gz
 Source2:        https://github.com/KhronosGroup/SPIRV-Headers/archive/%{commit2}.tar.gz#/SPIRV-Headers-%{shortcommit2}.tar.gz
 Source3:        https://github.com/KhronosGroup/SPIRV-Tools/archive/%{commit3}.tar.gz#/SPIRV-Tools-%{shortcommit3}.tar.gz
-
-# Do not download pre-built releases of dxc itself to run backward comparison tests:
-Patch0:         %{name}-backward-comp-tests.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -90,6 +87,11 @@ install -m644 include/dxc/*.h \
 %{_libdir}/libdxclib.a
 
 %changelog
+* Fri Oct 09 2026 Simone Caronni <negativo17@gmail.com> - 1.9.2609-1
+- Update to version 1.9.2609 (September 2026).
+- Drop backward compatibility tests patch, upstream downloads releases only on
+  Windows.
+
 * Tue Aug 11 2026 Simone Caronni <negativo17@gmail.com> - 1.9.2607-1
 - Update to version 1.9.2607 (July 2026).
 
